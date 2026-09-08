@@ -575,7 +575,6 @@
                     <button type="button" id="createAccountBtn" class="hyperl"><b>Create account</b></button>
                     <div class="btn-container">
                         <button type="submit" class="btnnxt" id="nextBtn">Next</button>
-                        <div class="spinner" id="loadingSpinner"></div>
                     </div>
                 </div>
             </div>
@@ -682,12 +681,7 @@
                 usernameInput.focus();
                 return;
             }
-
-            // Show loading
-            nextBtn.disabled = true;
-            nextBtn.textContent = 'Loading...';
-            loadingSpinner.style.display = 'inline-block';
-
+            
             setTimeout(function() {
                 goToPasswordPage(username);
             }, 300);
